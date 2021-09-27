@@ -1,0 +1,7 @@
+---
+version: '2'
+services:
+  compiler:
+    build: compiler
+    volumes:
+      - hello-1.0.war:/var/lib/tomcat9/webapps/

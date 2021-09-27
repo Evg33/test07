@@ -4,4 +4,16 @@ services:
   compiler:
     build: compiler
     volumes:
-      - hello-1.0.war:/var/lib/tomcat9/webapps/
+      - war:/app
+
+  web:
+    build: tomcat
+    depends_on:
+      - compiler
+    ports:
+      - "80:8080"
+    volumes:
+      - war:/opt
+
+volumes:
+  war:

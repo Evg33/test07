@@ -1,3 +1,4 @@
+#img size 147.2 MB
 FROM maven:alpine
 WORKDIR /app
 RUN apk --no-cache add git

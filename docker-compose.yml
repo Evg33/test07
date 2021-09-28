@@ -4,11 +4,13 @@ services:
 
   compiler:
     build: compiler
+    image: evg33/test07cmp
     volumes:
       - war:/app
 
   web:
     build: tomcat
+    image: evg33/tes07web
     depends_on:
       - compiler
     ports:

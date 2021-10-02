@@ -2,24 +2,23 @@
 version: '3.7'
 services:
 
-  buildapp:
-    build: build
+  bldr:
+    image: maven:alpine
     volumes:
-      - 'myshare:/shared'
-    image: evg33/hw07bld:0.0.6
-    pull_policy: never
+      - ./web/src:/tmp/src
+    working_dir: /tmp/src
+    command: >
+      bash -c "apk --no-cache add git &&
+               git clone https://github.com/boxfuse/boxfuse-sample-java-war-hello.git &&
+               mvn -T 1C -Dmaven.test.skip clean package -f boxfuse-sample-java-war-hello &&
+               cp boxfuse-sample-java-war-hello/target/hello-1.0.war . &&
+               rm -rf boxfuse-sample-java-war-hello"
 
   web:
     build: web
-    volumes:
-      - 'myshare:/shared:ro'
-    image: evg33/hw07web:0.0.6
-    pull_policy: never
+#    pull_policy: never
+    image: evg33/hw07web:0.0.8
     depends_on:
-      - buildapp
+      - bldr
     ports:
       - "80:8080"
-
-volumes:
-  myshare:
-    driver: local

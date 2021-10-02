@@ -1,9 +1,8 @@
 # test07
 
 ```
-# docker-compose images
-  Container       Repository     Tag       Image Id       Size
-----------------------------------------------------------------
-dz7_compiler_1   dz7_compiler   latest   42d8ff16c1d1   145.9 MB
-dz7_web_1        dz7_web        latest   94a3e87ae5cf   106.5 MB
+git clone --branch main https://github.com/Evg33/test07.git .
+docker-compose stop; docker-compose rm -sf; docker system prune -a -f
+docker-compose run bldr && docker-compose build web && docker-compose push
+
 ```

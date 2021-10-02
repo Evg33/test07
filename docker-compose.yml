@@ -6,14 +6,14 @@ services:
     build: build
     volumes:
       - 'myshare:/shared'
-    image: evg33/hw07bld:0.0.5
+    image: evg33/hw07bld:0.0.6
     pull_policy: never
 
   web:
     build: web
     volumes:
       - 'myshare:/shared:ro'
-    image: evg33/hw07web:0.0.5
+    image: evg33/hw07web:0.0.6
     pull_policy: never
     depends_on:
       - buildapp

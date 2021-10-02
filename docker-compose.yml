@@ -1,22 +1,25 @@
 ---
-version: '2'
+version: '3.7'
 services:
 
-  compiler:
-    build: compiler
-    image: evg33/test07cmp
+  buildapp:
+    build: build
     volumes:
-      - war:/app
+      - 'myshare:/shared'
+    image: evg33/hw07bld:0.0.5
+    pull_policy: never
 
   web:
-    build: tomcat
-    image: evg33/tes07web
+    build: web
+    volumes:
+      - 'myshare:/shared:ro'
+    image: evg33/hw07web:0.0.5
+    pull_policy: never
     depends_on:
-      - compiler
+      - buildapp
     ports:
       - "80:8080"
-    volumes:
-      - war:/opt
 
 volumes:
-  war:
+  myshare:
+    driver: local
